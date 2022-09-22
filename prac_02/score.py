@@ -3,11 +3,17 @@ CP1404/CP5632 - Practical
 Determine score status
 """
 
+from random import randint
+
 
 def main():
     """Ask the user for their score, then print the result"""
     score = float(input("Enter score: "))
-    print(get_result(score))
+    print(f"User score: {get_result(score)}")
+
+    # Generate random score.
+    score = randint(0, 100)
+    print(f"Random score: {get_result(score)}")
 
 
 def get_result(score):
