@@ -1,7 +1,4 @@
-"""
-CP1404/CP5632 - Practical
-Determine score status
-"""
+"""Determine score status"""
 
 from random import randint
 

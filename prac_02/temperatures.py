@@ -1,7 +1,4 @@
-"""
-CP1404/CP5632 - Practical
-Temperature conversion between celsius and fahrenheit.
-"""
+"""Temperature conversion between celsius and fahrenheit."""
 
 MENU = """C - Convert Celsius to Fahrenheit
 F - Convert Fahrenheit to Celsius
