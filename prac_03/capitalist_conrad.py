@@ -23,7 +23,7 @@ day = 1
 price = INITIAL_PRICE
 print(f"On day {day} price is: ${price:,.2f}", file=out_file)
 
-while price >= MIN_PRICE and price <= MAX_PRICE and day <= NUMBER_OF_DAYS:
+while MIN_PRICE <= price <= MAX_PRICE and day <= NUMBER_OF_DAYS:
     price_change = 0
     # generate a random integer of 1 or 2
     # if it's 1, the price increases, otherwise it decreases
