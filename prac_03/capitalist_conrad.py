@@ -16,9 +16,12 @@ MAX_PRICE = 100.0
 INITIAL_PRICE = 10.0
 NUMBER_OF_DAYS = 425
 
+OUTPUT_FILE = "simulation_result.txt"
+out_file = open(OUTPUT_FILE, 'w')
+
 day = 1
 price = INITIAL_PRICE
-print("${:,.2f}".format(price))
+print("On day {} price is: ${:,.2f}".format(day, price), file=out_file)
 
 while price >= MIN_PRICE and price <= MAX_PRICE and day <= NUMBER_OF_DAYS:
     price_change = 0
@@ -34,5 +37,6 @@ while price >= MIN_PRICE and price <= MAX_PRICE and day <= NUMBER_OF_DAYS:
         price_change = random.uniform(-MAX_DECREASE, 0)
 
     price *= (1 + price_change)
-    print("On day {} price is: ${:,.2f}".format(day, price))
+    print("On day {} price is: ${:,.2f}".format(day, price), file=out_file)
     day += 1
+out_file.close()
