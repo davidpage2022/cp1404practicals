@@ -41,7 +41,7 @@ def is_valid_password(password):
         count_lower += char.islower()
         count_upper += char.isupper()
         count_digit += char.isdigit()
-        count_special += not char.isalpha()
+        count_special += char in SPECIAL_CHARACTERS   # Alternatively: not char.isalpha()
 
     if count_lower == 0 or count_upper == 0 or count_digit == 0:
         return False
