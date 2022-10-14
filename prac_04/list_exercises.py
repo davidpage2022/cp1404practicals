@@ -1,7 +1,7 @@
-"""Program that prompts the user for 5 numbers and then displays information about them."""
+"""List exercises."""
 
 
-def main():
+def run_list_operations_exercise():
     """Prompt the user for 5 numbers and then displays information about them."""
     numbers = get_numbers()
     print_number_info(numbers)
@@ -25,4 +25,19 @@ def print_number_info(numbers):
     print(f"The average of the numbers is {(sum(numbers) / len(numbers))}")
 
 
-main()
+def run_security_checker_exercise():
+    """Ask the user for their username. Print "Access granted" if they are authorised,
+    otherwise print "Access denied". """
+    usernames = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye', 'swei45', 'BaseInterpreterInterface',
+                 'BaseStdIn', 'Command', 'ExecState', 'InteractiveConsole', 'InterpreterInterface', 'StartServer',
+                 'bob']
+
+    username = input("Enter user name: ")
+    if username in usernames:
+        print("Access granted")
+    else:
+        print("Access denied")
+
+
+# run_list_operations_exercise()
+run_security_checker_exercise()
