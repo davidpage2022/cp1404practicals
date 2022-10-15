@@ -33,11 +33,12 @@ def generate_lines(number_of_lines):
     """Generate random lines ("quick picks")."""
     lines = []
     for i in range(number_of_lines):
-        numbers = [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_LINE)]
+        numbers = generate_line_numbers()
 
         # Ensure numbers are unique.
         unique_numbers = find_unique_numbers(numbers)
         while len(unique_numbers) != len(numbers):
+            numbers = generate_line_numbers()
             unique_numbers = find_unique_numbers(numbers)
 
         lines.append(numbers)
@@ -48,6 +49,11 @@ def display_lines(lines):
     """Display lines, formatted into columns."""
     for line in lines:
         print(" ".join(f"{number:2}" for number in line))
+
+
+def generate_line_numbers():
+    """Generate a list of random numbers (i.e. a "quick pick")."""
+    return [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_LINE)]
 
 
 def find_unique_numbers(numbers):
