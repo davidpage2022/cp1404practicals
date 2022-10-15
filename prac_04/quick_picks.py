@@ -4,7 +4,7 @@ import random
 
 MIN_NUMBER = 1
 MAX_NUMBER = 45
-NUMBERS_PER_PICK = 6
+NUMBERS_PER_LINE = 6
 
 
 def main():
@@ -13,11 +13,11 @@ def main():
 
     lines = []
     for i in range(number_of_picks):
-        picks = [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_PICK)]
-        lines.append(picks)
+        numbers = [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_LINE)]
+        lines.append(numbers)
 
     for line in lines:
-        print(" ".join(f"{pick:2}" for pick in line))
+        print(" ".join(f"{number:2}" for number in line))
 
 
 main()
