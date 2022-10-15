@@ -34,6 +34,12 @@ def generate_lines(number_of_lines):
     lines = []
     for i in range(number_of_lines):
         numbers = [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_LINE)]
+
+        # Ensure numbers are unique.
+        unique_numbers = find_unique_numbers(numbers)
+        while len(unique_numbers) != len(numbers):
+            unique_numbers = find_unique_numbers(numbers)
+
         lines.append(numbers)
     return lines
 
@@ -42,6 +48,11 @@ def display_lines(lines):
     """Display lines, formatted into columns."""
     for line in lines:
         print(" ".join(f"{number:2}" for number in line))
+
+
+def find_unique_numbers(numbers):
+    """Return only numbers that only appear once in the given list."""
+    return [number for number in numbers if numbers.count(number) == 1]
 
 
 main()
