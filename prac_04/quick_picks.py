@@ -16,7 +16,17 @@ def main():
 
 def get_number_of_picks():
     """Return the number "quick picks" to use, obtained from the user."""
-    return int(input("How many quick picks? "))
+    is_valid = False
+    while not is_valid:
+        try:
+            number_of_picks = int(input("How many quick picks? "))
+            if number_of_picks > 0:
+                is_valid = True
+            else:
+                raise ValueError()
+        except ValueError:
+            print("Please enter a valid integer greater than zero")
+    return number_of_picks
 
 
 def generate_lines(number_of_lines):
