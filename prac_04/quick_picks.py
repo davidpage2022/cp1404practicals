@@ -57,7 +57,7 @@ def generate_line_numbers():
 
 
 def find_unique_numbers(numbers):
-    """Return only numbers that only appear once in the given list."""
+    """Return only numbers that appear once in the given list."""
     return [number for number in numbers if numbers.count(number) == 1]
 
 
