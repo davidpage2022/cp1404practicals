@@ -16,7 +16,8 @@ def main():
         picks = [random.randint(MIN_NUMBER, MAX_NUMBER) for _ in range(NUMBERS_PER_PICK)]
         lines.append(picks)
 
-    print(lines)
+    for line in lines:
+        print(" ".join(f"{pick:2}" for pick in line))
 
 
 main()
