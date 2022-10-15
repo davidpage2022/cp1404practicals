@@ -41,7 +41,7 @@ def generate_lines(number_of_lines):
             numbers = generate_line_numbers()
             unique_numbers = find_unique_numbers(numbers)
 
-        lines.append(numbers)
+        lines.append(sorted(numbers))
     return lines
 
 
