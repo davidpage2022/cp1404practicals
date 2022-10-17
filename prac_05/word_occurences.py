@@ -7,7 +7,7 @@ Actual:    13 minutes
 
 def main():
     """Count the occurrences of words in a string."""
-    string = "this is a collection of words of nice words this is a fun thing it is"  # input("Text: ")
+    string = input("Text: ")
 
     # Count word occurrences.
     words = string.split()
