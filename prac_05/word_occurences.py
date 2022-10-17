@@ -1,7 +1,7 @@
 """
 Word Occurrences
 Estimate:  40 minutes
-Actual:
+Actual:    13 minutes
 """
 
 
@@ -17,8 +17,9 @@ def main():
         word_to_lengths[word] = words.count(word)
 
     # Display sorted.
+    max_length = max(len(word) for word in unique_words)
     for word in sorted(word_to_lengths.keys()):
-        print(f"{word} : {word_to_lengths[word]}")
+        print(f"{word:{max_length}} : {word_to_lengths[word]}")
 
 
 main()
