@@ -38,9 +38,9 @@ def display_champions_info(data):
     champion_to_wins = {}
     for row in data:
         champion = row[CHAMPION_COLUMN]
-        try:
+        if champion in champion_to_wins:
             champion_to_wins[champion] += 1
-        except KeyError:
+        else:
             champion_to_wins[champion] = 1
 
     print("Wimbledon Champions:")
