@@ -1,6 +1,6 @@
 """Guitar exercise - Program using Guitar class
 Time expected: 30 min
-       actual:  min
+       actual: 40 min
 """
 from prac_06.guitar import Guitar
 
