@@ -1,4 +1,4 @@
-"""Guitar exercise
+"""Guitar exercise - Tests for Guitar class
 Time expected: 10 min
        actual: 8 min
 """

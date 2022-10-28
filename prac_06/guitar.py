@@ -1,4 +1,4 @@
-"""Guitar exercise
+"""Guitar exercise - Guitar class
 Time expected: 25 min
        actual: 15 min
 """
