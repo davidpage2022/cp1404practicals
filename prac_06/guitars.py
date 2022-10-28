@@ -2,26 +2,25 @@
 Time expected: 30 min
        actual:  min
 """
+from prac_06.guitar import Guitar
 
 
 def main():
     """Ask user for guitar data and then present information
     in a nicely formatted table."""
+    guitars = []
+
     print("My guitars!")
+    name = input("Name: ").strip()
+    while name != "":
+        year = get_positive_integer("Year: ")
+        cost = get_positive_float("Cost: $")
 
-    name = get_non_blank_string("Name: ")
-    year = get_positive_integer("Year: ")
-    cost = get_positive_float("Cost: $")
+        guitar = Guitar(name, year, cost)
+        guitars.append(guitar)
+        print(f"{guitar} added.")
 
-
-def get_non_blank_string(prompt):
-    """Gets a non-blank string from the user with prompt message.
-    Continues to ask until valid input is given."""
-    string = input(prompt).strip()
-    while string == "":
-        print("Cannot be blank")
-        string = input(prompt).strip()
-    return string
+        name = input("Name: ").strip()
 
 
 def get_positive_integer(prompt):
