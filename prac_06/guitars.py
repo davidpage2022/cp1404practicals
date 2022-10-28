@@ -9,6 +9,9 @@ def main():
     """Ask user for guitar data and then present information
     in a nicely formatted table."""
     guitars = []
+    # guitars = [Guitar("Gibson L-5 CES", 1922, 16035.40),
+    #            Guitar("Line 6 JTV-59", 2010, 1512.90),
+    #            Guitar("Fender Stratocaster", 2014, 765.40)]
 
     print("My guitars!")
     name = input("Name: ").strip()
@@ -21,6 +24,12 @@ def main():
         print(f"{guitar} added.")
 
         name = input("Name: ").strip()
+
+    print()
+    print("... snip ...")
+    print()
+    print("These are my guitars:")
+    display_guitars(guitars)
 
 
 def get_positive_integer(prompt):
@@ -49,6 +58,16 @@ def get_positive_float(prompt):
                 print("Must be a positive number")
         except ValueError:
             print("Must be a valid decimal number")
+
+
+def display_guitars(guitars):
+    """ Displays information about a list of Guitars, nicely formatted. """
+    max_length = max(len(guitar.name) for guitar in guitars)
+    for i, guitar in enumerate(guitars, 1):
+        vintage_string = " (vintage)" if guitar.is_vintage() else ""
+        print(f"Guitar {i}:  "
+              f"{guitar.name:>{max_length}} ({guitar.year}),"
+              f" worth ${guitar.cost:10,.2f}{vintage_string}")
 
 
 if __name__ == '__main__':
