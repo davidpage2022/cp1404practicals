@@ -23,35 +23,38 @@ def main():
 
     print(MENU)
     choice = input(">>> ").upper()
-    while choice != "Q":
-        if choice == "L":
+    while choice != "Q":  # Quit.
+
+        if choice == "L":  # Load.
             filename = input("Filename: ")
-            load_projects(filename)  # ???
-        elif choice == "S":
+            load_projects(filename)
+
+        elif choice == "S":  # Save.
             filename = input("Filename: ")
-            save_projects(projects, filename)  # ???
-        elif choice == "D":
+            save_projects(projects, filename)
+
+        elif choice == "D":  # Display.
             display_projects()
-        elif choice == "F":
+
+        elif choice == "F":  # Filter.
             date = get_date("Show projects that start after date (dd/mm/yy): ")
             filtered_projects = filter_projects_by_date(projects, date)
             for project in filtered_projects:
                 print(project)
-        elif choice == "A":
+
+        elif choice == "A":  # Add.
             project = get_new_project()
             projects.append(project)
-        elif choice == "U":
+
+        elif choice == "U":  # Update.
             for i, project in enumerate(projects):
                 print(f"{i} {project}")
             project = get_project(projects)
             print(project)
-            update_project(project)
-            percent_completed = get_percentage("New percentage: ")
-            priority = get_positive_integer("New priority: ")
-            if percent_completed != "":
-                project.percent_completed = percent_completed
-            if priority != "":
-                project.priority = priority
+            percent_completed, priority = get_status_updates(project)
+            project.percent_completed = percent_completed
+            project.priority = priority
+
         print(MENU)
         choice = input(">>> ").upper()
     save_projects(projects, FILENAME)
@@ -83,12 +86,17 @@ def get_date(param) -> datetime.date:
     pass
 
 
-def get_percentage(prompt) -> float:
-    pass
+def get_status_updates(project) -> (float, int):
+    """"""
+    percent_completed = input("New percentage: ")
+    priority = input("New priority: ")
 
+    if percent_completed == "":
+        percent_completed = project.percent_completed
+    if priority == "":
+        priority = project.priority
 
-def get_positive_integer(prompt) -> int:
-    pass
+    return percent_completed, priority
 
 
 def filter_projects_by_date(projects, date) -> list[Project]:
