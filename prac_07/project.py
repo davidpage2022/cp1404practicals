@@ -1,8 +1,4 @@
-""" Information about a project, for use in project management.
-    Estimated: 10
-    Actual: 12
-"""
-
+"""Information about a project, for use in project management."""
 
 class Project:
     """Describes information about a project"""
