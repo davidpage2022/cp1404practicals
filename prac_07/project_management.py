@@ -91,9 +91,10 @@ def get_new_project() -> Project:
 def get_project(projects) -> Project:
     """Asks the user to select a project from projects.
     Returns the project selected."""
-    # for i, project in enumerate(projects):
-    #     print(f"{i} {project}")
-    pass
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    project_index = int(input("Project choice: "))
+    return projects[project_index]
 
 
 def get_date(prompt) -> datetime.date:
