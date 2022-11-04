@@ -1,6 +1,6 @@
 """Project Management
 Estimated: 70
-Actual: 68 + 15
+Actual: 118
 """
 import datetime
 from operator import attrgetter
