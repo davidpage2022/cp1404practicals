@@ -8,6 +8,7 @@ from operator import attrgetter
 from prac_07.project import Project
 
 FILENAME = "projects.txt"
+HEADER = "Name	Start Date	Priority	Cost Estimate	Completion Percentage"
 MENU = """- (L)oad projects  
 - (S)ave projects  
 - (D)isplay projects  
@@ -55,7 +56,7 @@ def main():
 
         print(MENU)
         choice = input(">>> ").upper()
-    # save_projects(projects, FILENAME)
+    # save_projects(projects, FILENAME)  # Todo
     print("Thank you for using custom-built project management software.")
 
 
@@ -89,7 +90,16 @@ def load_projects(filename) -> list[Project]:
 
 def save_projects(projects: list[Project], filename):
     """Save a list of projects to a file with filename."""
-    pass
+    with open(filename, "w") as out_file:
+        print(HEADER, file=out_file)
+        for project in projects:
+            line = "\t".join(
+                [project.name,
+                 date_to_str(project.date),
+                 str(project.priority),
+                 str(project.cost_estimate),
+                 str(project.percent_completed)])
+            print(line, file=out_file)
 
 
 def get_new_project() -> Project:
