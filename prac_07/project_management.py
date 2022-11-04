@@ -18,6 +18,11 @@ MENU = """- (L)oad projects
 - (Q)uit"""
 
 
+class ExitRequested(Exception):
+    """Used to handle user wishing to exit out of entering input."""
+    pass
+
+
 def main():
     """Allow user to load, save and manage a list of projects."""
     projects = load_projects(FILENAME)
@@ -120,44 +125,85 @@ def get_project(projects) -> Project:
     Returns the project selected."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
-    project_index = int(input("Project choice: "))
-    return projects[project_index]  # TODO: Error check.
+    project_number = get_positive_integer("Project choice: ")
+    while project_number < 0 or project_number >= len(projects):
+        print("Not a valid project number")
+        project_number = get_positive_integer("Project choice: ")
+    return projects[project_number]
 
 
 def get_date(prompt) -> datetime.date:
     """Ask the user for a date in the format 'DD/MM/YYYY'.
     Continues to ask until a valid date is given.
     Returns a datetime.date."""
-    return str_to_date(input(prompt))  # TODO: Error check.
+    while True:
+        try:
+            return str_to_date(input(prompt))
+        except ValueError:
+            print("Date entered does not match DD/MM/YYYY format")
 
 
-def get_positive_integer(prompt) -> int:
+def get_positive_integer(prompt, raise_exception_on_blank=False) -> int:
     """Ask the user for a positive integer (or zero).
-    Continues to ask until a valid number is given."""
-    return int(input(prompt))  # TODO: Error check.
+    Continues to ask until a valid number is given.
+
+    If raise_exception_on_blank is enabled we throw a ExitRequested exception
+    when the user enters a blank line.
+    """
+    is_valid = False
+    string = ""  # Prevents warnings.
+    number = 0   # Prevents warnings.
+    while not is_valid:
+        try:
+            string = input(prompt)
+            number = int(string)
+            if number >= 0:
+                is_valid = True
+            else:
+                print("Number cannot be less than 0")
+        except ValueError:
+            if raise_exception_on_blank and string == "":
+                raise ExitRequested()
+            else:
+                print("Not a valid number")
+    return number
 
 
 def get_float(prompt) -> float:
     """Ask the user to enter any decimal number.
     Continues to ask until a valid number is given."""
-    return float(input(prompt))  # TODO: Error check.
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Not a valid whole number")
 
 
-def get_percentage(prompt) -> int:
+def get_percentage(prompt, raise_exception_on_blank=False) -> int:
     """Ask the user for an integer between 0 and 100.
-    Continues to ask until a valid number is given."""
-    return get_positive_integer(prompt)  # TODO: Error check.
+    Continues to ask until a valid number is given.
+
+    If raise_exception_on_blank is enabled we throw a ExitRequested exception
+    when the user enters a blank line.
+    """
+    percentage = get_positive_integer(prompt, raise_exception_on_blank)
+    while percentage > 100:
+        print("Must be between 0 and 100")
+        percentage = get_positive_integer(prompt, raise_exception_on_blank)
+    return percentage
 
 
 def get_status_updates(project) -> (int, int):
     """Ask the user for a percentage completed and priority to update a project with.
     If blank is entered the given project values are used instead.
     Returns (percent_completed, priority) tuple."""
-    percent_completed = get_percentage("New percentage: ")
-    priority = get_positive_integer("New priority: ")
-    if percent_completed == "":
+    try:
+        percent_completed = get_percentage("New percentage: ", raise_exception_on_blank=True)
+    except ExitRequested:
         percent_completed = project.percent_completed
-    if priority == "":
+    try:
+        priority = get_positive_integer("New priority: ", raise_exception_on_blank=True)
+    except ExitRequested:
         priority = project.priority
     return percent_completed, priority
 
