@@ -1,6 +1,6 @@
 """Project Management
 Estimated: 70
-Actual: 68
+Actual: 68 + 15
 """
 import datetime
 from operator import attrgetter
@@ -47,8 +47,6 @@ def main():
             projects.append(project)
 
         elif choice == "U":  # Update.
-            for i, project in enumerate(projects):
-                print(f"{i} {project}")
             project = get_project(projects)
             print(project)
             percent_completed, priority = get_status_updates(project)
@@ -62,32 +60,40 @@ def main():
 
 
 def load_projects(filename) -> list[Project]:
-    """"""
+    """Load projects from filename.
+    Returns a list of loaded projects."""
     return []
 
 
-def save_projects(projects, filename):
-    """"""
+def save_projects(projects: list[Project], filename):
+    """Save a list of projects to a file with filename."""
     pass
 
 
 def get_new_project() -> Project:
-    """"""
+    """Ask the user for information needed to create a new project.
+    Returns the newly created project."""
     pass
 
 
 def get_project(projects) -> Project:
-    """"""
+    """Asks the user to select a project from projects.
+    Returns the project selected."""
+    # for i, project in enumerate(projects):
+    #     print(f"{i} {project}")
     pass
 
 
-def get_date(param) -> datetime.date:
-    """"""
+def get_date(prompt) -> datetime.date:
+    """Ask the user for a date in the format 'dd/mm/yy'.
+    Returns a datetime.date."""
     pass
 
 
 def get_status_updates(project) -> (float, int):
-    """"""
+    """Ask the user for a percentage completed and priority to update a project with.
+    If blank is entered the given project values are used instead.
+    Returns (percent_completed, priority) tuple."""
     percent_completed = input("New percentage: ")
     priority = input("New priority: ")
 
@@ -100,18 +106,16 @@ def get_status_updates(project) -> (float, int):
 
 
 def filter_projects_by_date(projects, date) -> list[Project]:
-    """"""
+    """Make a list of projects filtered so that only those later than date
+    are included, and sort these by date.
+    Return the list created."""
     filtered_projects = [project for project in projects if project.date > date]
     return sorted(filtered_projects, key=attrgetter(date))
 
 
 def display_projects():
-    """"""
-    pass
-
-
-def update_project(project):
-    """"""
+    """Prints a list of incomplete projects and a list of complete projects,
+    both sorted by priority."""
     pass
 
 
