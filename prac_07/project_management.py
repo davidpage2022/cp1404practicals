@@ -27,7 +27,7 @@ def main():
 
         if choice == "L":  # Load.
             filename = input("Filename: ")
-            load_projects(filename)
+            projects = load_projects(filename)
 
         elif choice == "S":  # Save.
             filename = input("Filename: ")
