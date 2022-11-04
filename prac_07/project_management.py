@@ -21,43 +21,40 @@ def main():
     """Allow user to load, save and manage a list of projects."""
     projects = load_projects(FILENAME)
 
-    for project in projects:
-        print(project)
+    print(MENU)
+    choice = input(">>> ").upper()
+    while choice != "Q":  # Quit.
 
-    # print(MENU)
-    # choice = input(">>> ").upper()
-    # while choice != "Q":  # Quit.
-    #
-    #     if choice == "L":  # Load.
-    #         filename = input("Filename: ")
-    #         load_projects(filename)
-    #
-    #     elif choice == "S":  # Save.
-    #         filename = input("Filename: ")
-    #         save_projects(projects, filename)
-    #
-    #     elif choice == "D":  # Display.
-    #         display_projects()
-    #
-    #     elif choice == "F":  # Filter.
-    #         date = get_date("Show projects that start after date (dd/mm/yy): ")
-    #         filtered_projects = filter_projects_by_date(projects, date)
-    #         for project in filtered_projects:
-    #             print(project)
-    #
-    #     elif choice == "A":  # Add.
-    #         project = get_new_project()
-    #         projects.append(project)
-    #
-    #     elif choice == "U":  # Update.
-    #         project = get_project(projects)
-    #         print(project)
-    #         percent_completed, priority = get_status_updates(project)
-    #         project.percent_completed = percent_completed
-    #         project.priority = priority
-    #
-    #     print(MENU)
-    #     choice = input(">>> ").upper()
+        if choice == "L":  # Load.
+            filename = input("Filename: ")
+            load_projects(filename)
+
+        elif choice == "S":  # Save.
+            filename = input("Filename: ")
+            save_projects(projects, filename)
+
+        elif choice == "D":  # Display.
+            display_projects()
+
+        elif choice == "F":  # Filter.
+            date = get_date("Show projects that start after date (dd/mm/yy): ")
+            filtered_projects = filter_projects_by_date(projects, date)
+            for project in filtered_projects:
+                print(project)
+
+        elif choice == "A":  # Add.
+            project = get_new_project()
+            projects.append(project)
+
+        elif choice == "U":  # Update.
+            project = get_project(projects)
+            print(project)
+            percent_completed, priority = get_status_updates(project)
+            project.percent_completed = percent_completed
+            project.priority = priority
+
+        print(MENU)
+        choice = input(">>> ").upper()
     # save_projects(projects, FILENAME)
     print("Thank you for using custom-built project management software.")
 

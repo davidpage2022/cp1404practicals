@@ -22,7 +22,8 @@ class Project:
         self.percent_completed = percent_completed
 
     def __str__(self):
-        return (f"{self.name}, start: {self.date}, priority: {self.priority}, "
+        date_string = self.date.strftime("%d/%m/%Y")
+        return (f"{self.name}, start: {date_string}, priority: {self.priority}, "
                 f"estimate: {self.cost_estimate}, completion: {self.percent_completed}%")
 
     def is_complete(self) -> bool:
