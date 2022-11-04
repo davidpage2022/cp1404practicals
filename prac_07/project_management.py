@@ -61,7 +61,7 @@ def main():
 
         print(MENU)
         choice = input(">>> ").upper()
-    # save_projects(projects, FILENAME)  # Todo
+    save_projects(projects, FILENAME)
     print("Thank you for using custom-built project management software.")
 
 
