@@ -157,7 +157,7 @@ def filter_projects_by_date(projects, date) -> list[Project]:
     are included, and sort these by date.
     Return the list created."""
     filtered_projects = [project for project in projects if project.date > date]
-    return sorted(filtered_projects, key=attrgetter(date))
+    return sorted(filtered_projects, key=attrgetter("date"))
 
 
 def display_projects(projects):
