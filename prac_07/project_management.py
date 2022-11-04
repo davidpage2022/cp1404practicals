@@ -82,7 +82,7 @@ def load_projects(filename) -> list[Project]:
             date = str_to_date(parts[1])
             priority = int(parts[2])
             cost_estimate = float(parts[3])
-            percent_completed = float(parts[4])
+            percent_completed = int(parts[4])
             projects.append(
                 Project(name, date, priority, cost_estimate, percent_completed))
     return projects
@@ -143,13 +143,13 @@ def get_float(prompt) -> float:
     return float(input(prompt))  # TODO: Error check.
 
 
-def get_percentage(prompt) -> float:
-    """Ask the user for a number between 0 and 100.
+def get_percentage(prompt) -> int:
+    """Ask the user for an integer between 0 and 100.
     Continues to ask until a valid number is given."""
-    return float(input(prompt))  # TODO: Error check.
+    return get_positive_integer(prompt)  # TODO: Error check.
 
 
-def get_status_updates(project) -> (float, int):
+def get_status_updates(project) -> (int, int):
     """Ask the user for a percentage completed and priority to update a project with.
     If blank is entered the given project values are used instead.
     Returns (percent_completed, priority) tuple."""
