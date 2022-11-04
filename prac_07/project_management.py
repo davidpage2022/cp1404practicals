@@ -163,8 +163,16 @@ def filter_projects_by_date(projects, date) -> list[Project]:
 def display_projects(projects):
     """Prints a list of incomplete projects and a list of complete projects,
     both sorted by priority."""
-    for project in projects:
-        print(project)  # TODO: Separate into incomplete and complete lists, then sort each by priority.
+    incomplete = [project for project in projects if not project.is_complete()]
+    complete = [project for project in projects if project.is_complete()]
+
+    print("Incomplete projects")
+    for project in sorted(incomplete):
+        print(f"\t{project}")
+
+    print("Complete projects")
+    for project in sorted(complete):
+        print(f"\t{project}")
 
 
 if __name__ == '__main__':

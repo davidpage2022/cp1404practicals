@@ -30,6 +30,9 @@ class Project:
         return (f"Project({self.name}, {repr(self.date)}, {self.priority}, "
                 f"{self.cost_estimate}, {self.percent_completed})")
 
+    def __lt__(self, other: "Project"):
+        return self.priority < other.priority
+
     def is_complete(self) -> bool:
         """ If the project is 100% completed. """
-        return False  # TODO
+        return self.percent_completed == 100
