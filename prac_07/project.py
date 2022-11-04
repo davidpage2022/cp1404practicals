@@ -26,6 +26,10 @@ class Project:
         return (f"{self.name}, start: {date_string}, priority: {self.priority}, "
                 f"estimate: {self.cost_estimate}, completion: {self.percent_completed}%")
 
+    def __repr__(self):
+        return (f"Project({self.name}, {repr(self.date)}, {self.priority}, "
+                f"{self.cost_estimate}, {self.percent_completed})")
+
     def is_complete(self) -> bool:
         """ If the project is 100% completed. """
-        return False
+        return False  # TODO

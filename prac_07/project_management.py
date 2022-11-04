@@ -37,7 +37,7 @@ def main():
             display_projects(projects)
 
         elif choice == "F":  # Filter.
-            date = get_date("Show projects that start after date (dd/mm/yy): ")
+            date = get_date("Show projects that start after date (DD/MM/YYYY): ")
             filtered_projects = filter_projects_by_date(projects, date)
             for project in filtered_projects:
                 print(project)
@@ -59,6 +59,16 @@ def main():
     print("Thank you for using custom-built project management software.")
 
 
+def str_to_date(date_string) -> datetime.date:
+    """Convert a string in format DD/MM/YYYY to a datetime.date."""
+    return datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+
+
+def date_to_str(date) -> str:
+    """Convert a datetime.date to a string in format DD/MM/YYYY."""
+    return date.strftime("%d/%m/%Y")
+
+
 def load_projects(filename) -> list[Project]:
     """Load projects from filename.
     Returns a list of loaded projects."""
@@ -68,7 +78,7 @@ def load_projects(filename) -> list[Project]:
         for line in in_file:
             parts = line.strip().split("\t")
             name = parts[0]
-            date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
+            date = str_to_date(parts[1])
             priority = int(parts[2])
             cost_estimate = float(parts[3])
             percent_completed = float(parts[4])
@@ -85,36 +95,60 @@ def save_projects(projects: list[Project], filename):
 def get_new_project() -> Project:
     """Ask the user for information needed to create a new project.
     Returns the newly created project."""
-    pass
+    print("Let's add a new project")
+    name = input("Name: ")
+    date = get_date("Start date (DD/MM/YYYY): ")
+    priority = int(input("Priority: "))
+    cost_estimate = get_float("Cost estimate: ")
+    percentage_complete = get_percentage("Percentage complete: ")
+    return Project(name, date, priority, cost_estimate, percentage_complete)
 
 
 def get_project(projects) -> Project:
     """Asks the user to select a project from projects.
+    Continues to ask until a valid project is selected.
     Returns the project selected."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
     project_index = int(input("Project choice: "))
-    return projects[project_index]
+    return projects[project_index]  # TODO: Error check.
 
 
 def get_date(prompt) -> datetime.date:
-    """Ask the user for a date in the format 'dd/mm/yy'.
+    """Ask the user for a date in the format 'DD/MM/YYYY'.
+    Continues to ask until a valid date is given.
     Returns a datetime.date."""
-    pass
+    return str_to_date(input(prompt))  # TODO: Error check.
+
+
+def get_positive_integer(prompt) -> int:
+    """Ask the user for a positive integer (or zero).
+    Continues to ask until a valid number is given."""
+    return int(input(prompt))  # TODO: Error check.
+
+
+def get_float(prompt) -> float:
+    """Ask the user to enter any decimal number.
+    Continues to ask until a valid number is given."""
+    return float(input(prompt))  # TODO: Error check.
+
+
+def get_percentage(prompt) -> float:
+    """Ask the user for a number between 0 and 100.
+    Continues to ask until a valid number is given."""
+    return float(input(prompt))  # TODO: Error check.
 
 
 def get_status_updates(project) -> (float, int):
     """Ask the user for a percentage completed and priority to update a project with.
     If blank is entered the given project values are used instead.
     Returns (percent_completed, priority) tuple."""
-    percent_completed = input("New percentage: ")
-    priority = input("New priority: ")
-
+    percent_completed = get_percentage("New percentage: ")
+    priority = get_positive_integer("New priority: ")
     if percent_completed == "":
         percent_completed = project.percent_completed
     if priority == "":
         priority = project.priority
-
     return percent_completed, priority
 
 
@@ -130,7 +164,7 @@ def display_projects(projects):
     """Prints a list of incomplete projects and a list of complete projects,
     both sorted by priority."""
     for project in projects:
-        print(project)   # TODO: Separate into incomplete and complete lists, then sort each by priority.
+        print(project)  # TODO: Separate into incomplete and complete lists, then sort each by priority.
 
 
 if __name__ == '__main__':
