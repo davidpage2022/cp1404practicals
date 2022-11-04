@@ -34,7 +34,7 @@ def main():
             save_projects(projects, filename)
 
         elif choice == "D":  # Display.
-            display_projects()
+            display_projects(projects)
 
         elif choice == "F":  # Filter.
             date = get_date("Show projects that start after date (dd/mm/yy): ")
@@ -125,10 +125,11 @@ def filter_projects_by_date(projects, date) -> list[Project]:
     return sorted(filtered_projects, key=attrgetter(date))
 
 
-def display_projects():
+def display_projects(projects):
     """Prints a list of incomplete projects and a list of complete projects,
     both sorted by priority."""
-    pass
+    for project in projects:
+        print(project)   # TODO: Separate into incomplete and complete lists, then sort each by priority.
 
 
 if __name__ == '__main__':
