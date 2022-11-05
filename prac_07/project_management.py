@@ -3,6 +3,7 @@ Estimated: 70
 Actual: 118
 """
 import datetime
+import pickle
 from operator import attrgetter
 
 from prac_07.project import Project
@@ -78,33 +79,15 @@ def date_to_str(date) -> str:
 def load_projects(filename) -> list[Project]:
     """Load projects from filename.
     Returns a list of loaded projects."""
-    projects = []
-    with open(filename) as in_file:
-        in_file.readline()  # Ignore header row.
-        for line in in_file:
-            parts = line.strip().split("\t")
-            name = parts[0]
-            date = str_to_date(parts[1])
-            priority = int(parts[2])
-            cost_estimate = float(parts[3])
-            percent_completed = int(parts[4])
-            projects.append(
-                Project(name, date, priority, cost_estimate, percent_completed))
-    return projects
+    with open(filename, "rb") as in_file:
+        data = pickle.load(in_file)
+    return data
 
 
 def save_projects(projects: list[Project], filename):
     """Save a list of projects to a file with filename."""
-    with open(filename, "w") as out_file:
-        print(HEADER, file=out_file)
-        for project in projects:
-            line = "\t".join(
-                [project.name,
-                 date_to_str(project.date),
-                 str(project.priority),
-                 str(project.cost_estimate),
-                 str(project.percent_completed)])
-            print(line, file=out_file)
+    with open(filename, "wb") as out_file:
+        pickle.dump(projects, out_file)
 
 
 def get_new_project() -> Project:
