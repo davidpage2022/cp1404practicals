@@ -3,6 +3,7 @@ Estimated: 70
 Actual: 118
 """
 import datetime
+import json
 import pickle
 from operator import attrgetter
 
@@ -79,15 +80,39 @@ def date_to_str(date) -> str:
 def load_projects(filename) -> list[Project]:
     """Load projects from filename.
     Returns a list of loaded projects."""
-    with open(filename, "rb") as in_file:
-        data = pickle.load(in_file)
-    return data
+
+    # Load JSON data.
+    with open(filename, "r") as in_file:
+        projects = json.load(in_file)
+
+    # Recreate Project objects from JSON data.
+    for i, project in enumerate(projects):
+        project["date"] = str_to_date(project["date"])  # Recreate date object.
+        projects[i] = Project(*project.values())
+    return projects
+
+    # PICKLE METHOD:
+    # ----------------------------------------------
+    # with open(filename, "rb") as in_file:
+    #     data = pickle.load(in_file)
+    # return data
 
 
 def save_projects(projects: list[Project], filename):
     """Save a list of projects to a file with filename."""
-    with open(filename, "wb") as out_file:
-        pickle.dump(projects, out_file)
+
+    # Save data as JSON.
+    with open(filename, "w") as out_file:
+
+        # Project contains a datetime.date field which cannot be JSON serialized,
+        # so we call str_to_date when JSON does not know how to serialize a field.
+        json_string = json.dumps([vars(project) for project in projects], default=date_to_str)
+        print(json_string, file=out_file)
+
+    # PICKLE METHOD:
+    # ----------------------------------------------
+    # with open(filename, "wb") as out_file:
+    #     pickle.dump(projects, out_file)
 
 
 def get_new_project() -> Project:
