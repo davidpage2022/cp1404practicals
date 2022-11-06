@@ -28,5 +28,3 @@ My name is David Page. I'm an IT student at JCU.
 
 * [Programming Patterns](https://github.com/CP1404/Starter/wiki/Programming-Patterns)
 * [CP1404 Practicals](https://github.com/CP1404/Practicals)
-
-TODO: Keep going....
