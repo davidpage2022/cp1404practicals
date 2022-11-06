@@ -2,13 +2,6 @@
 
 This repository contains my practical work for Programming II - CP1404.
 
-## Features
-
-* Improved programming language code (from prac_06).
-* Extended guitar exercises (from prac_06).
-* Project management program for loading, saving, viewing and modifying projects.
-* Project management extended to save and load data in JSON format.
-
 ## Author
 
 My name is David Page. I'm an IT student at JCU.
