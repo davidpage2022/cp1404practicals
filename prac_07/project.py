@@ -11,7 +11,8 @@ class Project:
 
         name: Project title.
         date: Start date.
-        priority: Number indicating priority (e.g. 1 is highest priority, followed by 2, then 3...etc).
+        priority: Number indicating priority
+        (e.g. 1 is highest priority, followed by 2, then 3...etc).
         cost_estimate: Estimated cost of the project.
         percent_completed: Number between 0 - 100 indicating percentage completed.
         """

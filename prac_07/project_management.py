@@ -4,18 +4,18 @@ Actual: 118
 """
 import datetime
 import json
-import pickle
+# import pickle
 from operator import attrgetter
 
 from prac_07.project import Project
 
 FILENAME = "projects.txt"
 HEADER = "Name	Start Date	Priority	Cost Estimate	Completion Percentage"
-MENU = """- (L)oad projects  
-- (S)ave projects  
-- (D)isplay projects  
+MENU = """- (L)oad projects
+- (S)ave projects
+- (D)isplay projects
 - (F)ilter projects by date
-- (A)dd new project  
+- (A)dd new project
 - (U)pdate project
 - (Q)uit"""
 
@@ -82,7 +82,7 @@ def load_projects(filename) -> list[Project]:
     Returns a list of loaded projects."""
 
     # Load JSON data.
-    with open(filename, "r") as in_file:
+    with open(filename, "r", encoding="utf-8") as in_file:
         projects = json.load(in_file)
 
     # Recreate Project objects from JSON data.
@@ -102,7 +102,7 @@ def save_projects(projects: list[Project], filename):
     """Save a list of projects to a file with filename."""
 
     # Save data as JSON.
-    with open(filename, "w") as out_file:
+    with open(filename, "w", encoding="utf-8") as out_file:
 
         # Project contains a datetime.date field which cannot be JSON serialized,
         # so we call str_to_date when JSON does not know how to serialize a field.
@@ -169,11 +169,11 @@ def get_positive_integer(prompt, raise_exception_on_blank=False) -> int:
                 is_valid = True
             else:
                 print("Number cannot be less than 0")
-        except ValueError:
+        except ValueError as error:
             if raise_exception_on_blank and string == "":
-                raise ExitRequested()
-            else:
-                print("Not a valid number")
+                # Raise our own exception for handling user requesting exit from input.
+                raise ExitRequested() from error
+            print("Not a valid number")
     return number
 
 
