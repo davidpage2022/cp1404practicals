@@ -157,6 +157,10 @@ def get_positive_integer(prompt, raise_exception_on_blank=False) -> int:
 
     If raise_exception_on_blank is enabled we throw a ExitRequested exception
     when the user enters a blank line.
+
+    TODO: This exception technique could be extended to other input handling
+    functions to allow the user to cancel an action instead of being stuck
+    in an input entering loop.
     """
     is_valid = False
     string = ""  # Prevents warnings.
