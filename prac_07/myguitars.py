@@ -10,7 +10,7 @@ FILENAME = "guitars.csv"
 def main():
     """Read guitars from a file and display them."""
     guitars = load_guitars(FILENAME)
-    for guitar in guitars:
+    for guitar in sorted(guitars):
         print(guitar)
 
 
