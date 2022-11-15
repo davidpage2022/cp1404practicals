@@ -23,6 +23,7 @@ class DynamicLabelsApp(App):
         """Dynamically generates labels based on list of names given on construction."""
         for name in self.names:
             label = Label(text=name)
+            # self.root.add_widget(label)  # For adding directly to root widget.
             self.root.ids.main.add_widget(label)
 
 
