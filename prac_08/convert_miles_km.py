@@ -20,6 +20,11 @@ class MilesToKmConverter(App):
         km = miles * MILES_TO_KM
         self.output_km_text = f"{km:.3f}"
 
+    def handle_increment(self, amount):
+        miles = float(self.root.ids.input_miles.text)
+        miles += amount
+        self.root.ids.input_miles.text = str(miles)
+
 
 if __name__ == '__main__':
     MilesToKmConverter().run()
