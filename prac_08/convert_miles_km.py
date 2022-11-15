@@ -30,6 +30,7 @@ class MilesToKmConverter(App):
             miles = 0
         miles += amount
         self.root.ids.input_miles.text = str(miles)
+        self.handle_convert()
 
 
 if __name__ == '__main__':
