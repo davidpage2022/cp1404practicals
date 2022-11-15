@@ -5,6 +5,7 @@ BoxLayout:
         TextInput:
             id: input_miles
             text: "0"
+            font_size: 48
             size_hint_x: 0.8
             on_text: app.handle_convert()
         BoxLayout:
@@ -21,3 +22,5 @@ BoxLayout:
 #        on_press: app.handle_convert()
     Label:
         text: app.output_km_text
+        font_size: 48
+        color: (1, 1, 0, 1)
