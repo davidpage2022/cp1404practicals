@@ -16,12 +16,18 @@ class MilesToKmConverter(App):
         return self.root
 
     def handle_convert(self):
-        miles = float(self.root.ids.input_miles.text)
+        try:
+            miles = float(self.root.ids.input_miles.text)
+        except ValueError:
+            miles = 0
         km = miles * MILES_TO_KM
         self.output_km_text = f"{km:.3f}"
 
     def handle_increment(self, amount):
-        miles = float(self.root.ids.input_miles.text)
+        try:
+            miles = float(self.root.ids.input_miles.text)
+        except ValueError:
+            miles = 0
         miles += amount
         self.root.ids.input_miles.text = str(miles)
 
