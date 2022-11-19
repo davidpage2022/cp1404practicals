@@ -36,6 +36,7 @@ def main():
                 try:
                     distance = float(input("Drive how far? "))
                     if distance > 0:
+                        current_taxi.start_fare()
                         current_taxi.drive(distance)
                         fare = current_taxi.get_fare()
                         current_bill += fare
