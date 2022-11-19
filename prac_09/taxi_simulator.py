@@ -20,7 +20,17 @@ def main():
     choice = input(">>> ").lower()
     while choice != "q":
         if choice == "c":
-            pass
+            print("Taxis available:")
+            for i, taxi in enumerate(taxis):
+                print(f"{i} - {taxi}")
+            try:
+                taxi_index = int(input("Choose taxi: "))
+                if 0 <= taxi_index < len(taxis):
+                    current_taxi = taxis[taxi_index]
+                else:
+                    print("Invalid taxi choice")
+            except ValueError:
+                print("Invalid taxi choice")
         elif choice == "d":
             if current_taxi is not None:
                 pass
