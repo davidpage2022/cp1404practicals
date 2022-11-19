@@ -1,5 +1,11 @@
+"""Band class."""
+
+
 class Band:
+    """Describes a band, including musicians in the band."""
+
     def __init__(self, name):
+        """Construct band."""
         self.name = name
         self.musicians = []
 
@@ -8,9 +14,11 @@ class Band:
         return f"{self.name} ({', '.join(musician_strings)})"
 
     def add(self, musician):
+        """Add a musician to the band."""
         self.musicians.append(musician)
 
     def play(self):
+        """Returns a string containing the results of all musicians playing their instruments."""
         play_string = ""
         for musician in self.musicians:
             play_string = "".join([play_string, musician.play(), "\n"])
