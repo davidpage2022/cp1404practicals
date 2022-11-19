@@ -9,8 +9,9 @@ def main():
 
     print(f"Base taxis price per km: ${Taxi.price_per_km:0.2f}")
     for taxi in taxis:
+        taxi.drive(18)
         print(taxi)
-    print(f"Base taxis price per km: ${Taxi.price_per_km:0.2f}")
+        print(f"Fare: ${taxi.get_fare():.2f}")
 
 
 if __name__ == '__main__':
