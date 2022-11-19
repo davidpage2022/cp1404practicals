@@ -21,29 +21,22 @@ def main():
     while choice != "q":
         if choice == "c":
             print("Taxis available:")
-            for i, taxi in enumerate(taxis):
-                print(f"{i} - {taxi}")
-            try:
-                taxi_index = int(input("Choose taxi: "))
-                if 0 <= taxi_index < len(taxis):
-                    current_taxi = taxis[taxi_index]
-                else:
-                    print("Invalid taxi choice")
-            except ValueError:
+            display_taxis(taxis)
+            taxi_index = get_taxi_index(taxis)
+            if taxi_index is not None:
+                current_taxi = taxis[taxi_index]
+            else:
                 print("Invalid taxi choice")
         elif choice == "d":
             if current_taxi is not None:
-                try:
-                    distance = float(input("Drive how far? "))
-                    if distance > 0:
-                        current_taxi.start_fare()
-                        current_taxi.drive(distance)
-                        fare = current_taxi.get_fare()
-                        current_bill += fare
-                        print(f"Your {current_taxi.name} trip cost you ${fare:.2f}")
-                    else:
-                        print("Invalid distance")
-                except ValueError:
+                distance = get_drive_distance()
+                if distance is not None:
+                    current_taxi.start_fare()
+                    current_taxi.drive(distance)
+                    fare = current_taxi.get_fare()
+                    current_bill += fare
+                    print(f"Your {current_taxi.name} trip cost you ${fare:.2f}")
+                else:
                     print("Invalid distance")
             else:
                 print("You need to choose a taxi before you can drive")
@@ -54,8 +47,43 @@ def main():
         choice = input(">>> ").lower()
     print(f"Total trip cost: ${current_bill}")
     print("Taxis are now:")
+    display_taxis(taxis)
+
+
+def display_taxis(taxis):
+    """Display taxis in a numbered list, showing their details."""
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
+
+
+def get_taxi_index(taxis):
+    """Asks the user for a taxi index.
+
+    :return: If the taxi index is valid returns the index.
+    Otherwise, returns None."""
+    try:
+        taxi_index = int(input("Choose taxi: "))
+        if 0 <= taxi_index < len(taxis):
+            return taxi_index
+        else:
+            return None
+    except ValueError:
+        return None
+
+
+def get_drive_distance():
+    """Asks the user for a distance to drive.
+
+    :return: If the distance is valid (i.e. a positive number), returns the distance.
+    Otherwise, returns None."""
+    try:
+        distance = float(input("Drive how far? "))
+        if distance > 0:
+            return distance
+        else:
+            return None
+    except ValueError:
+        return None
 
 
 if __name__ == '__main__':
